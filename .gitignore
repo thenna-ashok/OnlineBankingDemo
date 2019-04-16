@@ -1,0 +1,22 @@
+target/
+bin/
+*.iml
+.idea/
+.idea/.*
+
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.ear
+*.log
+hs_err_pid*
+id_file
+
+target/logs
+target/test-classes/.*
+target/test-classes
+*.orig
