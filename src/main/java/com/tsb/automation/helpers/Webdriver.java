@@ -8,10 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 
+/**
+ * This class initialize the web drive and contains selenium methods used for UI automation
+ */
 public class Webdriver {
 
     public static WebDriver driver = null;
@@ -19,7 +22,7 @@ public class Webdriver {
     public static WebDriver getDriver() {
         String browser = GetFilePathHelper.getGlobalPropertiesFile().getProperty("browser");
         if(StringUtils.isNotEmpty(browser)) {
-            switch (browser) {
+            switch (browser.toLowerCase()) {
                 case "chrome":
                     System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
                     driver = new ChromeDriver();
@@ -61,8 +64,17 @@ public class Webdriver {
         driver.findElement(By.xpath(elementToEnterValue)).sendKeys(valueToEnter);
     }
 
-    public static void verifyText (String textToVerify){
+    public static void verifyText(String textToVerify){
         List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + textToVerify + "')]"));
         Assert.assertTrue("Text not found!", list.size() > 0);
+    }
+
+    public static void selectValueFromList(String elementID, String listValue){
+        Select account = new Select(driver.findElement(By.xpath(elementID)));
+        account.selectByVisibleText(listValue);
+    }
+
+    public static String getText(String elementToGetTxt){
+        return driver.findElement(By.xpath(elementToGetTxt)).getText();
     }
 }
