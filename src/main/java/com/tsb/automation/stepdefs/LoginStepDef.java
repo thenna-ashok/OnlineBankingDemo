@@ -4,6 +4,7 @@ import com.tsb.automation.helpers.GetFilePathHelper;
 import com.tsb.automation.helpers.Constants;
 import com.tsb.automation.helpers.Log;
 import com.tsb.automation.helpers.Webdriver;
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -52,6 +53,13 @@ public class LoginStepDef {
         Webdriver.verifyPageLoad(Constants.LNK_MY_ACC);
         Webdriver.verifyText(Constants.VERIFY_TXT_LANDING_PAGE);
         Webdriver.clickElement(Constants.LNK_LOG_OFF);
+        Webdriver.closeBrowser();
+    }
+
+    @Then("^I should see the login failure error message$")
+    public void iShouldSeeTheLoginFailureErrorMessage() {
+        Webdriver.verifyPageLoad("//span[@id='_ctl0__ctl0_Content_Main_message']");
+        Webdriver.verifyText(Constants.TXT_LOGIN_FAIL_MESSAGE);
         Webdriver.closeBrowser();
     }
 }

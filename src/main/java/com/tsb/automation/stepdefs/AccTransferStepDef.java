@@ -94,7 +94,8 @@ public class AccTransferStepDef {
 
     @Then("^I verify that the \"([^\"]*)\" transferred successfully$")
     public void iVerifyThatTheFundsTransferredSuccessfully(String amount) {
-        Webdriver.verifyText(amount + ".0" + Constants.TXT_TRANSFER_SUCCESS_03_TO_02);
+        Webdriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_03_TO_02);
+        Webdriver.clickElement(Constants.LNK_LOG_OFF);
         Webdriver.closeBrowser();
     }
 

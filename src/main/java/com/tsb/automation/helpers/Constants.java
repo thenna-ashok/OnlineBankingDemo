@@ -30,5 +30,7 @@ public class Constants {
     public static String VERIFY_TXT_LANDING_PAGE = "Welcome to Altoro Mutual Online.";
     public static String VERIFY_TXT_AVAIL_BAL = "Available balance";
     public static Float FUND_TO_TRANSFER = 100.0f;
+    public static String TXT_DECIMAL = ".0";
     public static String TXT_TRANSFER_SUCCESS_03_TO_02 = " was successfully transferred from Account 800003 into Account 800002";
+    public static String TXT_LOGIN_FAIL_MESSAGE = "Login Failed";
 }
