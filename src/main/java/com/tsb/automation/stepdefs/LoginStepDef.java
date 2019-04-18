@@ -16,14 +16,10 @@ import cucumber.api.java.en.When;
  */
 public class LoginStepDef {
     private String url = null;
-    private String userName = null;
-    private String password = null;
 
     @Before
     public void initializeData(){
         url = GetFilePathHelper.getGlobalPropertiesFile().getProperty("url");
-        userName = GetFilePathHelper.getGlobalPropertiesFile().getProperty("username");
-        password = GetFilePathHelper.getGlobalPropertiesFile().getProperty("password");
     }
 
     @Given("^I navigate to the online banking application url$")
@@ -40,8 +36,8 @@ public class LoginStepDef {
         Webdriver.verifyPageLoad(Constants.BTN_LOGIN);
     }
 
-    @And("^I enter the username and password to login$")
-    public void iEnterTheUsernameAndPasswordToLogin() {
+    @And("^I enter the \"([^\"]*)\" and \"([^\"]*)\" to login$")
+    public void iEnterTheUsernameAndPasswordToLogin(String userName, String password) {
         Webdriver.enterValue(Constants.TXT_USERNAME, userName);
         Webdriver.enterValue(Constants.TXT_PASSWORD, password);
     }
@@ -55,5 +51,7 @@ public class LoginStepDef {
     public void iShouldBeOnTheLandingPageOfUserAccount() {
         Webdriver.verifyPageLoad(Constants.LNK_MY_ACC);
         Webdriver.verifyText(Constants.VERIFY_TXT_LANDING_PAGE);
+        Webdriver.clickElement(Constants.LNK_LOG_OFF);
+        Webdriver.closeBrowser();
     }
 }

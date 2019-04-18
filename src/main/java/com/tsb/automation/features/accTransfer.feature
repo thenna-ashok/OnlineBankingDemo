@@ -1,14 +1,13 @@
 @Transfer
 Feature: Validate account transfer functionality
 
-  Scenario: Verify the transfer of funds from checking to savings accounts
-    Given I navigate to the online banking portal and login as a valid user
-    When I check the "800003 Checking" account have enough balance to transfer
-    And I check the current balance in "800002 Savings" account
-    And I navigate to the transfer funds and transfer "100" dollars
-#    Then I verify that the funds transferred successfully
+  Scenario Outline: Verify the transfer of funds from checking to savings accounts
+    Given I navigate to the online banking portal and login with a valid "<username>" and "<password>"
+    When I check the "<checkingAcc>" account have enough balance to transfer
+    And I check the current balance in "<savingsAcc>" account
+    And I navigate to the transfer funds and transfer "<amount>" dollars from "<checkingAcc>" to "<savingsAcc>"
+    Then I verify that the "<amount>" transferred successfully
 
-#  Examples:
-#
-#    | amount | checkingAcc     | savingsAcc     |
-#    | 100    | 800003 Checking | 800002 Savings |
+    Examples:
+    | username | password | amount | checkingAcc     | savingsAcc     |
+    | jsmith   | Demo1234 | 200    | 800003          | 800002         |

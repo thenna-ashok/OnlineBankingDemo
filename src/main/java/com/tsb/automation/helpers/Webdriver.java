@@ -71,7 +71,7 @@ public class Webdriver {
 
     public static void selectValueFromList(String elementID, String listValue){
         Select account = new Select(driver.findElement(By.xpath(elementID)));
-        account.selectByVisibleText(listValue);
+        account.selectByValue(listValue);
     }
 
     public static String getText(String elementToGetTxt){

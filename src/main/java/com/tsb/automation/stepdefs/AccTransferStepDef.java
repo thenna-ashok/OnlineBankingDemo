@@ -1,37 +1,32 @@
 package com.tsb.automation.stepdefs;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import com.tsb.automation.helpers.GetFilePathHelper;
 import com.tsb.automation.helpers.Constants;
 import com.tsb.automation.helpers.Webdriver;
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
-
 import static junit.framework.TestCase.fail;
 
+/**
+ * @author thenna
+ * This class contains the step definitions for fund transfer between accounts feature
+ */
 public class AccTransferStepDef {
-
     private String url = null;
-    private String userName = null;
-    private String password = null;
     private Float checkingAccBalance = 0.0f;
     private Float savingsAccBalance = 0.0f;
 
     @Before
     public void initializeData(){
         url = GetFilePathHelper.getGlobalPropertiesFile().getProperty("url");
-        userName = GetFilePathHelper.getGlobalPropertiesFile().getProperty("username");
-        password = GetFilePathHelper.getGlobalPropertiesFile().getProperty("password");
     }
 
-    @Given("^I navigate to the online banking portal and login as a valid user$")
-    public void iNavigateToTheOnlineBankingPortalAndLoginAsAValidUser() {
+    @Given("^I navigate to the online banking portal and login with a valid \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void iNavigateToTheOnlineBankingPortalAndLoginAsAValidUser(String userName, String password) {
         // navigate to the website
         Webdriver.getDriver();
         Webdriver.openURL(url);
@@ -86,15 +81,21 @@ public class AccTransferStepDef {
         }
     }
 
-    @And("^I navigate to the transfer funds and transfer \"([^\"]*)\" dollars$")
-    public void iNavigateToTheTransferFundsAndTransferDollars(String amountToTransfer) {
+    @And("^I navigate to the transfer funds and transfer \"([^\"]*)\" dollars from \"([^\"]*)\" to \"([^\"]*)\"$")
+    public void iNavigateToTheTransferFundsAndTransferDollars(String amountToTransfer, String fromAccount, String toAccount) {
         Webdriver.clickElement(Constants.LNK_TRANSFER_FUND);
+
+        // Select from and to account to transfer funds between accounts
+        Webdriver.selectValueFromList(Constants.LST_FROM_ACC, fromAccount);
+        Webdriver.selectValueFromList(Constants.LST_TO_ACC, toAccount);
+        Webdriver.enterValue(Constants.TXT_TRANSFER_AMOUNT, amountToTransfer);
+        Webdriver.clickElement(Constants.BTN_TRANSFER);
     }
 
-    @Then("^I verify that the funds transferred successfully$")
-    public void iVerifyThatTheFundsTransferredSuccessfully() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^I verify that the \"([^\"]*)\" transferred successfully$")
+    public void iVerifyThatTheFundsTransferredSuccessfully(String amount) {
+        Webdriver.verifyText(amount + ".0" + Constants.TXT_TRANSFER_SUCCESS_03_TO_02);
+        Webdriver.closeBrowser();
     }
 
 }

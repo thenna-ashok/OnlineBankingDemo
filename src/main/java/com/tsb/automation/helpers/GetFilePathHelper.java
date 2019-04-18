@@ -13,8 +13,4 @@ public class GetFilePathHelper {
     public static Properties getGlobalPropertiesFile() {
         return PropertiesHandler.loadProperties(resourcePath + "\\" + globalPropertiesFile);
     }
-
-    /*public static Properties getLog4jPropertiesFile() {
-        return PropertiesHandler.loadProperties(resourcePath + "\\" + log4jPropertiesFile);
-    }*/
 }
