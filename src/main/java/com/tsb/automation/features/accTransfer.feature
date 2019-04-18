@@ -9,5 +9,5 @@ Feature: Validate account transfer functionality
     Then I verify that the "<amount>" transferred successfully
 
     Examples:
-    | username | password | amount | checkingAcc     | savingsAcc     |
-    | jsmith   | Demo1234 | 200    | 800003          | 800002         |
+      | username | password | amount | checkingAcc | savingsAcc |
+      | jsmith   | Demo1234 | 200    | 800003      | 800002     |

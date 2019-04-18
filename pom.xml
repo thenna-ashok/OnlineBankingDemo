@@ -8,89 +8,89 @@
     <artifactId>OnlineBankingDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<source>1.8</source>-->
-                    <!--<target>1.8</target>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                <!--<version>2.21.0</version>-->
-                <!--<configuration>-->
-                    <!--<printSummary>true</printSummary>-->
-                    <!--<testFailureIgnore>true</testFailureIgnore>-->
-                    <!--<includes>-->
-                        <!--<include>**/TestRunner.java</include>-->
-                    <!--</includes>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>net.masterthought</groupId>-->
-                <!--<artifactId>maven-cucumber-reporting</artifactId>-->
-                <!--<version>3.14.0</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>execution</id>-->
-                        <!--<phase>test</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>generate</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<projectName>OnlineDemo-TestAutomation</projectName>-->
-                            <!--<outputDirectory>${project.build.directory}/cucumber-pretty-report</outputDirectory>-->
-                            <!--<cucumberOutput>${project.build.directory}/json/output.json</cucumberOutput>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.21.0</version>
+                <configuration>
+                    <printSummary>true</printSummary>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <includes>
+                        <include>**/TestRunner.java</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
-                <version>2.8.0</version>
+                <version>3.14.0</version>
                 <executions>
                     <execution>
                         <id>execution</id>
-                        <phase>verify</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>OnlineBankingDemo</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+                            <projectName>OnlineDemo-TestAutomation</projectName>
+                            <outputDirectory>${project.build.directory}/cucumber-pretty-report</outputDirectory>
+                            <cucumberOutput>${project.build.directory}/json/output.json</cucumberOutput>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>7</source>
-                    <target>7</target>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.22.0</version>-->
+                <!--<configuration>-->
+                    <!--<testFailureIgnore>true</testFailureIgnore>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+                <!--<groupId>net.masterthought</groupId>-->
+                <!--<artifactId>maven-cucumber-reporting</artifactId>-->
+                <!--<version>2.8.0</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>execution</id>-->
+                        <!--<phase>verify</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<projectName>OnlineBankingDemo</projectName>-->
+                            <!--<outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>-->
+                            <!--<cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<source>7</source>-->
+                    <!--<target>7</target>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
 
     <dependencies>
         <dependency>

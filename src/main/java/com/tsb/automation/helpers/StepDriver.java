@@ -15,20 +15,23 @@ import java.util.List;
 /**
  * This class initialize the web drive and contains selenium methods used for UI automation
  */
-public class Webdriver {
+public class StepDriver {
 
-    public static WebDriver driver = null;
+    private static WebDriver driver = null;
 
-    public static WebDriver getDriver() {
+    public static void getDriver() {
+        Log.log.info("Entering method getDriver()");
         String browser = GetFilePathHelper.getGlobalPropertiesFile().getProperty("browser");
         if(StringUtils.isNotEmpty(browser)) {
             switch (browser.toLowerCase()) {
                 case "chrome":
+                    Log.log.info("setting up chrome browser");
                     System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
                     driver = new ChromeDriver();
                     driver.manage().window().maximize();
                     break;
                 case "firefox":
+                    Log.log.info("setting up firefox browser");
                     driver = new FirefoxDriver();
                     driver.manage().window().maximize();
                     break;
@@ -38,43 +41,50 @@ public class Webdriver {
         } else {
             Log.log.error("** There is no browser defined **");
         }
-        return driver;
     }
 
     public static void openURL(String url){
+        Log.log.info("opening the url in the browser");
         driver.get(url);
     }
 
     public static void closeBrowser() {
+        Log.log.info("closing the browser");
         driver.close();
         driver.quit();
     }
 
-    public static void verifyPageLoad(String elementToVerify){
+    public static void verifyPageLoad(String elementToVerify) {
+        Log.log.info("verifying the page load");
         WebDriverWait waitForElement = new WebDriverWait(driver, 20);
         WebElement element = driver.findElement(By.xpath(elementToVerify));
         waitForElement.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void clickElement(String elementToClick){
+    public static void clickElement(String elementToClick) {
+        Log.log.info("clicking the element");
         driver.findElement(By.xpath(elementToClick)).click();
     }
 
     public static void enterValue(String elementToEnterValue, String valueToEnter) {
+        Log.log.info("entering the value: " + valueToEnter);
         driver.findElement(By.xpath(elementToEnterValue)).sendKeys(valueToEnter);
     }
 
-    public static void verifyText(String textToVerify){
+    public static void verifyText(String textToVerify) {
+        Log.log.info("verifying the text: " + textToVerify);
         List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + textToVerify + "')]"));
         Assert.assertTrue("Text not found!", list.size() > 0);
     }
 
-    public static void selectValueFromList(String elementID, String listValue){
+    public static void selectValueFromList(String elementID, String listValue) {
+        Log.log.info("selecting value from the list");
         Select account = new Select(driver.findElement(By.xpath(elementID)));
         account.selectByValue(listValue);
     }
 
-    public static String getText(String elementToGetTxt){
+    public static String getText(String elementToGetTxt) {
+        Log.log.info("getting the text from the element");
         return driver.findElement(By.xpath(elementToGetTxt)).getText();
     }
 }
