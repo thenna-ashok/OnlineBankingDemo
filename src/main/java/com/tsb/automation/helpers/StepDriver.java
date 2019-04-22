@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class initialize the web drive and contains selenium methods used for UI automation
@@ -86,5 +87,10 @@ public class StepDriver {
     public static String getText(String elementToGetTxt) {
         Log.log.info("getting the text from the element");
         return driver.findElement(By.xpath(elementToGetTxt)).getText();
+    }
+
+    public static void waitForElement(long timeToWait) {
+        Log.log.info("Entering into waiForElement method");
+        driver.manage().timeouts().implicitlyWait(timeToWait, TimeUnit.SECONDS);
     }
 }

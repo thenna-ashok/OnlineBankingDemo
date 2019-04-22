@@ -103,11 +103,18 @@ public class AccTransferStepDef {
         StepDriver.clickElement(Constants.BTN_TRANSFER);
     }
 
-    @Then("^I verify that the \"([^\"]*)\" transferred successfully$")
-    public void iVerifyThatTheFundsTransferredSuccessfully(final String amount) {
+    @Then("^I verify that the \"([^\"]*)\" transferred successfully from \"([^\"]*)\"$")
+    public void iVerifyThatTheFundsTransferredSuccessfully(final String amount, final String accountName) {
         Log.log.info("Entering the step - iVerifyThatTheFundsTransferredSuccessfully");
 
-        StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_03_TO_02);
+        if(accountName.equalsIgnoreCase(Constants.SAVINGS_ACC)) {
+            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_02_TO_03);
+        } else if(accountName.equalsIgnoreCase(Constants.CHECKING_ACC)) {
+            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_03_TO_02);
+        } else if(accountName.equalsIgnoreCase(Constants.CREDIT_CARD_ACC)) {
+            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_CC_TO_02);
+        }
+
         StepDriver.clickElement(Constants.LNK_LOG_OFF);
         StepDriver.closeBrowser();
     }

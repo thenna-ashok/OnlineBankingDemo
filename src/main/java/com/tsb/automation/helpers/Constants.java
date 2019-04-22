@@ -32,5 +32,11 @@ public class Constants {
     public static Float FUND_TO_TRANSFER = 100.0f;
     public static String TXT_DECIMAL = ".0";
     public static String TXT_TRANSFER_SUCCESS_03_TO_02 = " was successfully transferred from Account 800003 into Account 800002";
+    public static String TXT_TRANSFER_SUCCESS_02_TO_03 = " was successfully transferred from Account 800002 into Account 800003";
+    public static String TXT_TRANSFER_SUCCESS_CC_TO_02 = " was successfully transferred from Account 4539082039396288 into Account 800002";
+    public static String TXT_TRANSFER_SUCCESS_CC_TO_03 = " was successfully transferred from Account 4539082039396288 into Account 800003";
     public static String TXT_LOGIN_FAIL_MESSAGE = "Login Failed";
+    public static final String SAVINGS_ACC = "800002";
+    public static final String CHECKING_ACC = "800003";
+    public static final String CREDIT_CARD_ACC = "4539082039396288 ";
 }
