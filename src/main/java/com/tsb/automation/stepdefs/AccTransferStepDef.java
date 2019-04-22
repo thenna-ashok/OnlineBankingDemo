@@ -10,6 +10,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 
 import static junit.framework.TestCase.fail;
 
@@ -51,9 +52,9 @@ public class AccTransferStepDef {
         StepDriver.verifyText(Constants.VERIFY_TXT_LANDING_PAGE);
     }
 
-    @When("^I check the \"([^\"]*)\" account have enough balance to transfer$")
-    public void iCheckTheCheckingAccountHaveEnoughBalanceToTransfer(String accountName) {
-        Log.log.info("Entering the step - iCheckTheCheckingAccountHaveEnoughBalanceToTransfer");
+    @When("^I check the \"([^\"]*)\" account have enough balance to transfer \"([^\"]*)\"$")
+    public void iCheckTheAccountHaveEnoughBalanceToTransfer(final String accountName, final String amountToTransfer) {
+        Log.log.info("Entering the step - iCheckTheAccountHaveEnoughBalanceToTransfer");
 
         // verify the checking account balance
         StepDriver.selectValueFromList(Constants.LST_ACC_DETAILS, accountName);
@@ -68,14 +69,14 @@ public class AccTransferStepDef {
         }
 
         // verify checking account have enough balance to transfer fund
-        if (!(checkingAccBalance > Constants.FUND_TO_TRANSFER)) {
-            fail("Checking Account doesn't have enough balance to transfer!");
+        if (!(checkingAccBalance > Float.parseFloat(amountToTransfer))) {
+            fail("Account " + accountName +" doesn't have enough balance to transfer!");
         }
     }
 
     @And("^I check the current balance in \"([^\"]*)\" account$")
-    public void iCheckTheCurrentBalanceInSavingsAccount(String accountName) {
-        Log.log.info("Entering the step - iCheckTheCurrentBalanceInSavingsAccount");
+    public void iCheckTheCurrentBalanceInAccount(String accountName) {
+        Log.log.info("Entering the step - iCheckTheCurrentBalanceInAccount");
 
         // verify the checking account balance
         StepDriver.selectValueFromList(Constants.LST_ACC_DETAILS, accountName);
@@ -108,14 +109,25 @@ public class AccTransferStepDef {
         Log.log.info("Entering the step - iVerifyThatTheFundsTransferredSuccessfully");
 
         if(accountName.equalsIgnoreCase(Constants.SAVINGS_ACC)) {
-            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_02_TO_03);
+            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_02_TO_03);
         } else if(accountName.equalsIgnoreCase(Constants.CHECKING_ACC)) {
-            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_03_TO_02);
+            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_03_TO_02);
         } else if(accountName.equalsIgnoreCase(Constants.CREDIT_CARD_ACC)) {
-            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.TXT_TRANSFER_SUCCESS_CC_TO_02);
+            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_CC_TO_02);
         }
+    }
 
-        StepDriver.clickElement(Constants.LNK_LOG_OFF);
-        StepDriver.closeBrowser();
+    @Then("^I verify the cash advance fee for the cash withdrawn from \"([^\"]*)\"$")
+    public void iVerifyTheCashAdvanceFeeForTheCashWithdrawn(String accountName) {
+        Log.log.info("Entering the step - iVerifyTheCashAdvanceFeeForTheCashWithdrawn");
+
+        // Navigate to credit card account summary
+        StepDriver.clickElement(Constants.LNK_ACC_SUMMARY);
+        StepDriver.selectValueFromList(Constants.LST_ACC_DETAILS, accountName);
+        StepDriver.clickElement(Constants.BTN_GO);
+
+        // verify cash withdrawn fee value
+        String cashAdvanceFee = StepDriver.getText(Constants.TXT_CASH_ADV_FEE);
+        Assert.assertEquals("verify credit card cash advance fee", Constants.VERIFY_TXT_CC_CASH_ADV_FEE, cashAdvanceFee);
     }
 }

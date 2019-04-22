@@ -4,7 +4,6 @@ import com.tsb.automation.helpers.GetFilePathHelper;
 import com.tsb.automation.helpers.Constants;
 import com.tsb.automation.helpers.Log;
 import com.tsb.automation.helpers.StepDriver;
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -68,20 +67,7 @@ public class LoginStepDef {
         Log.log.info("Entering the step - iShouldSeeTheLoginFailureErrorMessage");
 
         StepDriver.verifyPageLoad("//span[@id='_ctl0__ctl0_Content_Main_message']");
-        StepDriver.verifyText(Constants.TXT_LOGIN_FAIL_MESSAGE);
+        StepDriver.verifyText(Constants.VERIFY_TXT_LOGIN_FAIL_MESSAGE);
         StepDriver.closeBrowser();
-    }
-
-    @Then("^I should logoff the user and close the browser$")
-    public void iShouldLogoffTheUserAndCloseTheBrowser() {
-        Log.log.info("Entering the step - iShouldLogoffTheUser");
-        StepDriver.clickElement(Constants.LNK_LOG_OFF);
-        StepDriver.closeBrowser();
-    }
-
-    @And("^I wait for \"([^\"]*)\" seconds$")
-    public void iWaitForSeconds(String timeToWait) {
-        Log.log.info("Entering the step - iShouldWaitForSeconds");
-        StepDriver.waitForElement(Long.parseLong(timeToWait));
     }
 }
