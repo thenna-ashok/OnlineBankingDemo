@@ -22,7 +22,7 @@ public class StepDriver {
 
     public static void getDriver() {
         Log.log.info("Entering method getDriver()");
-        String browser = GetFilePathHelper.getGlobalPropertiesFile().getProperty("browser");
+        String browser = GlobalHelper.getGlobalPropertiesFile().getProperty("browser");
         if(StringUtils.isNotEmpty(browser)) {
             switch (browser.toLowerCase()) {
                 case "chrome":

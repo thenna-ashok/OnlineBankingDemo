@@ -1,6 +1,6 @@
 package com.tsb.automation.stepdefs;
 
-import com.tsb.automation.helpers.GetFilePathHelper;
+import com.tsb.automation.helpers.GlobalHelper;
 import com.tsb.automation.helpers.Constants;
 import com.tsb.automation.helpers.Log;
 import com.tsb.automation.helpers.StepDriver;
@@ -20,7 +20,7 @@ public class NavigateStepDef {
 
     @Before
     public void initializeData(){
-        url = GetFilePathHelper.getGlobalPropertiesFile().getProperty("url");
+        url = GlobalHelper.getGlobalPropertiesFile().getProperty("url");
         Log.log.info("Website url: " + url);
     }
 

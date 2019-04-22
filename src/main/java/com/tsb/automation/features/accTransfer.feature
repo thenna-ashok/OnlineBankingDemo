@@ -7,6 +7,7 @@ Feature: Validate account transfer functionality
     And I check the current balance in "<savingsAcc>" account
     And I navigate to the transfer funds and transfer "<amount>" dollars from "<checkingAcc>" to "<savingsAcc>"
     And I verify that the "<amount>" transferred successfully from "<checkingAcc>"
+    And I verify the recent transaction of "<amount>" in "<checkingAcc>" and "<savingsAcc>"
     Then I should logoff the user and close the browser
 
     Examples:
@@ -21,6 +22,7 @@ Feature: Validate account transfer functionality
     And I check the current balance in "<checkingAcc>" account
     And I navigate to the transfer funds and transfer "<amount>" dollars from "<savingsAcc>" to "<checkingAcc>"
     And I verify that the "<amount>" transferred successfully from "<savingsAcc>"
+    And I verify the recent transaction of "<amount>" in "<checkingAcc>" and "<savingsAcc>"
     Then I should logoff the user and close the browser
     Examples:
       | username | password | amount | checkingAcc | savingsAcc |

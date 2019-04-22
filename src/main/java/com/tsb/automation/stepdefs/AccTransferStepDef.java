@@ -1,6 +1,6 @@
 package com.tsb.automation.stepdefs;
 
-import com.tsb.automation.helpers.GetFilePathHelper;
+import com.tsb.automation.helpers.GlobalHelper;
 import com.tsb.automation.helpers.Constants;
 import com.tsb.automation.helpers.Log;
 import com.tsb.automation.helpers.StepDriver;
@@ -20,12 +20,12 @@ import static junit.framework.TestCase.fail;
  */
 public class AccTransferStepDef {
     private String url = null;
-    private Float checkingAccBalance = 0.0f;
-    private Float savingsAccBalance = 0.0f;
+    private Float fromAccBalance = 0.0f;
+    private Float toAccBalance = 0.0f;
 
     @Before
     public void initializeData() {
-        url = GetFilePathHelper.getGlobalPropertiesFile().getProperty("url");
+        url = GlobalHelper.getGlobalPropertiesFile().getProperty("url");
         Log.log.info("Website url: " + url);
     }
 
@@ -65,11 +65,11 @@ public class AccTransferStepDef {
         // converting the checking acc balance to float to verify the balance
         if (StringUtils.isNoneEmpty(availBal)) {
             availBal = availBal.replace("$", "").trim();
-            checkingAccBalance = Float.parseFloat(availBal);
+            fromAccBalance = Float.parseFloat(availBal);
         }
 
         // verify checking account have enough balance to transfer fund
-        if (!(checkingAccBalance > Float.parseFloat(amountToTransfer))) {
+        if (!(fromAccBalance > Float.parseFloat(amountToTransfer))) {
             fail("Account " + accountName +" doesn't have enough balance to transfer!");
         }
     }
@@ -87,7 +87,7 @@ public class AccTransferStepDef {
         // converting the savings acc balance to float to verify the balance
         if (StringUtils.isNoneEmpty(availBal)) {
             availBal = availBal.replace("$", "").trim();
-            savingsAccBalance = Float.parseFloat(availBal);
+            toAccBalance = Float.parseFloat(availBal);
         }
     }
 
@@ -129,5 +129,41 @@ public class AccTransferStepDef {
         // verify cash withdrawn fee value
         String cashAdvanceFee = StepDriver.getText(Constants.TXT_CASH_ADV_FEE);
         Assert.assertEquals("verify credit card cash advance fee", Constants.VERIFY_TXT_CC_CASH_ADV_FEE, cashAdvanceFee);
+    }
+
+    @And("^I verify the recent transaction of \"([^\"]*)\" in \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void iVerifyTheRecentTransactionsInBothTheAccounts(String transferredAmount, String fromAcc, String toAcc) {
+        Log.log.info("Entering the step - iVerifyTheRecentTransactionsInBothTheAccounts");
+
+        // Navigate to account summary
+        StepDriver.clickElement(Constants.LNK_ACC_SUMMARY);
+        StepDriver.selectValueFromList(Constants.LST_ACC_DETAILS, fromAcc);
+        StepDriver.clickElement(Constants.BTN_GO);
+
+        // verify source account transaction
+        String txnDate = StepDriver.getText(Constants.VERIFY_TXN_DATE);
+        Assert.assertEquals("verify " + fromAcc + " transaction date: ", GlobalHelper.getCurrentDate(), txnDate);
+
+        String fromAccTxnDesc = StepDriver.getText(Constants.VERIFY_TXN_DESC);
+        Assert.assertEquals("verify " + fromAcc + " transaction description: ", Constants.VERIFY_TXT_WITHDRAWAL, fromAccTxnDesc);
+
+        String fromAcctxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
+        String sourceAccAmount = "-$" + transferredAmount + ".00";
+        Assert.assertEquals("verify " + fromAcc + " transaction date: ", sourceAccAmount, fromAcctxnAmount);
+
+        // Navigate to account summary
+        StepDriver.clickElement(Constants.LNK_ACC_SUMMARY);
+        StepDriver.selectValueFromList(Constants.LST_ACC_DETAILS, toAcc);
+        StepDriver.clickElement(Constants.BTN_GO);
+
+        // verify destination account transaction
+        Assert.assertEquals("verify " + toAcc + " transaction date: ", GlobalHelper.getCurrentDate(), txnDate);
+
+        String toAccTxnDesc = StepDriver.getText(Constants.VERIFY_TXN_DESC);
+        Assert.assertEquals("verify " + toAcc + " transaction description: ", Constants.VERIFY_TXT_DEPOSIT, toAccTxnDesc);
+
+        String toAcctxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
+        String destAccAmount = "$" + transferredAmount + ".00";
+        Assert.assertEquals("verify " + toAcc + " transaction date: ", destAccAmount, toAcctxnAmount);
     }
 }

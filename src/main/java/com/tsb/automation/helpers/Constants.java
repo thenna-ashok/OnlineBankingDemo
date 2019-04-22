@@ -24,6 +24,9 @@ public class Constants {
     public static String BTN_TRANSFER = "//input[@id='transfer']";
     public static String TXT_CASH_ADV_FEE = "//div[@id='recent']//tr[1]//td[3]";
     public static String LNK_ACC_SUMMARY = "//a[contains(text(),'View Account Summary')]";
+    public static final String VERIFY_TXN_DATE = "//div[@id='recent']//tr[1]//td[1]";
+    public static final String VERIFY_TXN_DESC = "//div[@id='recent']//tr[1]//td[2]";
+    public static final String VERIFY_TXN_AMOUNT = "//div[@id='recent']//tr[1]//td[3]";
 
     public static String VERIFY_TXT_HEADER_1 = "PERSONAL";
     public static String VERIFY_TXT_HEADER_2 = "SMALL BUSINESS";
@@ -42,4 +45,8 @@ public class Constants {
     public static final String CHECKING_ACC = "800003";
     public static final String CREDIT_CARD_ACC = "4539082039396288 ";
     public static final String VERIFY_TXT_CC_CASH_ADV_FEE = "$2.50";
+    public static final String VERIFY_TXT_DEPOSIT = "Deposit";
+    public static final String VERIFY_TXT_WITHDRAWAL = "Withdrawal";
+
+
 }
