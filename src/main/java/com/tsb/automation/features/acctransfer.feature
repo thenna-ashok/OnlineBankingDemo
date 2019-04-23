@@ -20,7 +20,7 @@ Feature: Validate account transfer functionality
     When I check the "<savingsAcc>" account have enough balance to transfer "<amount>"
     And I navigate to the transfer funds and transfer "<amount>" dollars from "<savingsAcc>" to "<checkingAcc>"
     And I verify that the "<amount>" transferred successfully from "<savingsAcc>"
-    And I verify the recent transaction of "<amount>" in "<checkingAcc>" and "<savingsAcc>"
+    And I verify the recent transaction of "<amount>" in "<savingsAcc>" and "<checkingAcc>"
     Then I should logoff the user and close the browser
     Examples:
       | username | password | amount | checkingAcc | savingsAcc |

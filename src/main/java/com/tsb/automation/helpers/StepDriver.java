@@ -34,6 +34,7 @@ public class StepDriver {
                     break;
                 case "firefox":
                     Log.log.info("setting up firefox browser");
+                    System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\geckodriver.exe");
                     driver = new FirefoxDriver();
                     driver.manage().window().maximize();
                     break;
@@ -53,7 +54,6 @@ public class StepDriver {
     public static void closeBrowser() {
         Log.log.info("closing the browser");
         driver.close();
-        driver.quit();
     }
 
     public static void verifyPageLoad(String elementToVerify) {
