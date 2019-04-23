@@ -1,9 +1,9 @@
-Online Banking demo using Selenium and BDD Framework
+                        **Online Banking demo using Selenium and BDD Framework**
 
 This project demonstrates the Test Approach to automate the online banking demo scenarios using Java, Selenium. Cucumber and Maven.
 
 
-#Feature files:
+**_Feature files:_**
 
 package: com.tsb.automation.features
 
@@ -12,7 +12,7 @@ There are three feature files used to automate the scenarios.
 2. navigate.feature - This feature contains navigation scenario steps
 3. acctransfer.feature - This feature file execute the test scenarios for transferring amount between accounts
 
-#Java classes:
+**_Java classes:_**
 
 package: com.tsb.automation.helpers
 
@@ -22,15 +22,15 @@ package: com.tsb.automation.stepdefs
 
 This package contains step definition classes for all the feature files
 
-#resources:
+**_resources:_**
 
 This folder contains all the properties files used in this project and drivers to run on the browser
 
-#spotlessApply 
+**_SpotlessApply:_**
 
 This is a general-purpose formatting plugin. Execute the below command when ever the code is modified $ mvn spotless:apply
 
-#How to run this project using intellij
+**_How to run this project using intellij_**
 
 Prerequisites
 
@@ -40,7 +40,7 @@ Prerequisites
 
 Using the maven command clean and test
 
-#Reports 
+**_Reports:**_ 
 
 After execution of the scenarios, cucumber test results are saved under the below path 
 target -> cucumber-pretty-report -> cucumber-html-reports -> index.html
