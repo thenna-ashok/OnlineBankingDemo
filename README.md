@@ -1,4 +1,4 @@
-                        **Online Banking demo using Selenium and BDD Framework**
+**Online Banking demo using Selenium and BDD Framework**
 
 This project demonstrates the Test Approach to automate the online banking demo scenarios using Java, Selenium. Cucumber and Maven.
 
@@ -40,7 +40,7 @@ Prerequisites
 
 Using the maven command clean and test
 
-**_Reports:**_ 
+**_Reports:_**
 
 After execution of the scenarios, cucumber test results are saved under the below path 
 target -> cucumber-pretty-report -> cucumber-html-reports -> index.html
