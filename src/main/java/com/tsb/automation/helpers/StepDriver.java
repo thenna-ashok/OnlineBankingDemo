@@ -1,5 +1,8 @@
 package com.tsb.automation.helpers;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -10,8 +13,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * This class initialize the web drive and contains selenium methods used for UI automation

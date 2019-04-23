@@ -1,18 +1,20 @@
 package com.tsb.automation.stepdefs;
 
-import com.tsb.automation.helpers.GlobalHelper;
+import static junit.framework.TestCase.fail;
+
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
+
 import com.tsb.automation.helpers.Constants;
+import com.tsb.automation.helpers.GlobalHelper;
 import com.tsb.automation.helpers.Log;
 import com.tsb.automation.helpers.StepDriver;
+
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
-
-import static junit.framework.TestCase.fail;
 
 /**
  * @author thenna
@@ -112,11 +114,11 @@ public class AccTransferStepDef {
         Log.log.info("Entering the step - iVerifyThatTheFundsTransferredSuccessfully");
 
         if(accountName.equalsIgnoreCase(Constants.SAVINGS_ACC)) {
-            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_02_TO_03);
+            StepDriver.verifyText(amount + Constants.TXT_ONE_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_02_TO_03);
         } else if(accountName.equalsIgnoreCase(Constants.CHECKING_ACC)) {
-            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_03_TO_02);
+            StepDriver.verifyText(amount + Constants.TXT_ONE_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_03_TO_02);
         } else if(accountName.equalsIgnoreCase(Constants.CREDIT_CARD_ACC)) {
-            StepDriver.verifyText(amount + Constants.TXT_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_CC_TO_02);
+            StepDriver.verifyText(amount + Constants.TXT_ONE_DECIMAL + Constants.VERIFY_TXT_TRANSFER_SUCCESS_CC_TO_02);
         }
     }
 
@@ -151,7 +153,7 @@ public class AccTransferStepDef {
         Assert.assertEquals("verify " + fromAcc + " transaction description: ", Constants.VERIFY_TXT_WITHDRAWAL, fromAccTxnDesc);
 
         String fromAccTxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
-        String sourceAccAmount = "-$" + transferredAmount + ".00";
+        String sourceAccAmount = "-$" + transferredAmount + Constants.TXT_TWO_DECIMALS;
         Assert.assertEquals("verify " + fromAcc + " transaction date: ", sourceAccAmount, fromAccTxnAmount);
 
         // Navigate to account summary
@@ -166,7 +168,7 @@ public class AccTransferStepDef {
         Assert.assertEquals("verify " + toAcc + " transaction description: ", Constants.VERIFY_TXT_DEPOSIT, toAccTxnDesc);
 
         String toAccTxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
-        String destAccAmount = "$" + transferredAmount + ".00";
+        String destAccAmount = "$" + transferredAmount + Constants.TXT_TWO_DECIMALS;
         Assert.assertEquals("verify " + toAcc + " transaction date: ", destAccAmount, toAccTxnAmount);
     }
 }
