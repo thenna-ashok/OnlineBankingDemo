@@ -24,7 +24,7 @@ public class GlobalHelper {
     }
 
     /**
-     * This method returns current UTC date
+     * This method returns current CST date
      * @return
      */
     public static String getCurrentDate(){
@@ -32,8 +32,8 @@ public class GlobalHelper {
         calendar.setTime(new Date());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        //Here you say to java the initial timezone
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        //Converting to CST timezone
+        sdf.setTimeZone(TimeZone.getTimeZone("CST"));
 
         return sdf.format(calendar.getTime());
     }

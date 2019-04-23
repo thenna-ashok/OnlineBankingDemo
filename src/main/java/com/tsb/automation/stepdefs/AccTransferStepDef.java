@@ -21,6 +21,8 @@ import static junit.framework.TestCase.fail;
 public class AccTransferStepDef {
     private String url = null;
     private Float fromAccBalance = 0.0f;
+
+    // for future use
     private Float toAccBalance = 0.0f;
 
     @Before
@@ -74,6 +76,7 @@ public class AccTransferStepDef {
         }
     }
 
+    // This step is implemented for future use to verify the available balance after transferring the amount
     @And("^I check the current balance in \"([^\"]*)\" account$")
     public void iCheckTheCurrentBalanceInAccount(String accountName) {
         Log.log.info("Entering the step - iCheckTheCurrentBalanceInAccount");
@@ -147,9 +150,9 @@ public class AccTransferStepDef {
         String fromAccTxnDesc = StepDriver.getText(Constants.VERIFY_TXN_DESC);
         Assert.assertEquals("verify " + fromAcc + " transaction description: ", Constants.VERIFY_TXT_WITHDRAWAL, fromAccTxnDesc);
 
-        String fromAcctxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
+        String fromAccTxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
         String sourceAccAmount = "-$" + transferredAmount + ".00";
-        Assert.assertEquals("verify " + fromAcc + " transaction date: ", sourceAccAmount, fromAcctxnAmount);
+        Assert.assertEquals("verify " + fromAcc + " transaction date: ", sourceAccAmount, fromAccTxnAmount);
 
         // Navigate to account summary
         StepDriver.clickElement(Constants.LNK_ACC_SUMMARY);
@@ -162,8 +165,8 @@ public class AccTransferStepDef {
         String toAccTxnDesc = StepDriver.getText(Constants.VERIFY_TXN_DESC);
         Assert.assertEquals("verify " + toAcc + " transaction description: ", Constants.VERIFY_TXT_DEPOSIT, toAccTxnDesc);
 
-        String toAcctxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
+        String toAccTxnAmount = StepDriver.getText(Constants.VERIFY_TXN_AMOUNT);
         String destAccAmount = "$" + transferredAmount + ".00";
-        Assert.assertEquals("verify " + toAcc + " transaction date: ", destAccAmount, toAcctxnAmount);
+        Assert.assertEquals("verify " + toAcc + " transaction date: ", destAccAmount, toAccTxnAmount);
     }
 }
