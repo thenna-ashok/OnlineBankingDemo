@@ -38,7 +38,7 @@ Prerequisites
     Maven
     Install Cucumber plugin in intellij
 
-Using the maven command clean and test
+Using the maven command clean and test or run via IntelliJ
 
 **_Reports:_**
 
