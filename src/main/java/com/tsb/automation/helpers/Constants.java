@@ -46,4 +46,6 @@ public class Constants {
     public static final String VERIFY_TXT_DEPOSIT = "Deposit";
     public static final String VERIFY_TXT_WITHDRAWAL = "Withdrawal";
     public static final String TXT_TWO_DECIMALS = ".00";
+    public static final String CHROME_BROWSER = "chrome";
+    public static final String FIREFOX_BROWSER = "firefox";
 }

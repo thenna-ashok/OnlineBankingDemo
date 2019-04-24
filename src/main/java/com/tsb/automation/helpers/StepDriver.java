@@ -20,19 +20,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class StepDriver {
 
     private static WebDriver driver = null;
+    private static String browser = null;
 
     public static void getDriver() {
         Log.log.info("Entering method getDriver()");
-        String browser = GlobalHelper.getGlobalPropertiesFile().getProperty("browser");
+        browser = GlobalHelper.getGlobalPropertiesFile().getProperty("browser");
         if(StringUtils.isNotEmpty(browser)) {
             switch (browser.toLowerCase()) {
-                case "chrome":
+                case Constants.CHROME_BROWSER:
                     Log.log.info("setting up chrome browser");
                     System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
                     driver = new ChromeDriver();
                     driver.manage().window().maximize();
                     break;
-                case "firefox":
+                case Constants.FIREFOX_BROWSER:
                     Log.log.info("setting up firefox browser");
                     System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\geckodriver.exe");
                     driver = new FirefoxDriver();
@@ -54,6 +55,9 @@ public class StepDriver {
     public static void closeBrowser() {
         Log.log.info("closing the browser");
         driver.close();
+        if(browser.equalsIgnoreCase(Constants.CHROME_BROWSER)) {
+            driver.quit();
+        }
     }
 
     public static void verifyPageLoad(String elementToVerify) {
