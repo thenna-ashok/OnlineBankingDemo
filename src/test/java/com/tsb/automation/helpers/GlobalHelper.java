@@ -15,7 +15,7 @@ public class GlobalHelper {
     private static String globalPropertiesFile = "autotest.properties";
     private static String log4jPropertiesFile = "log4j.properties";
 
-    private static File file = new File("src\\main\\resources");
+    private static File file = new File(Constants.RESOURCES_PATH);
     private static File resourcePath = file.getAbsoluteFile();
 
     public static Properties getGlobalPropertiesFile() {

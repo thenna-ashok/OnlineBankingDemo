@@ -48,4 +48,7 @@ public class Constants {
     public static final String TXT_TWO_DECIMALS = ".00";
     public static final String CHROME_BROWSER = "chrome";
     public static final String FIREFOX_BROWSER = "firefox";
+    public static final String CHROME_BROWSER_PATH = "src\\test\\resources\\chromedriver.exe";
+    public static final String FIREFOX_BROWSER_PATH = "src\\test\\resources\\geckodriver.exe";
+    public static final String RESOURCES_PATH = "src\\test\\resources";
 }

@@ -29,13 +29,13 @@ public class StepDriver {
             switch (browser.toLowerCase()) {
                 case Constants.CHROME_BROWSER:
                     Log.log.info("setting up chrome browser");
-                    System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", Constants.CHROME_BROWSER_PATH);
                     driver = new ChromeDriver();
                     driver.manage().window().maximize();
                     break;
                 case Constants.FIREFOX_BROWSER:
                     Log.log.info("setting up firefox browser");
-                    System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\geckodriver.exe");
+                    System.setProperty("webdriver.gecko.driver", Constants.FIREFOX_BROWSER_PATH);
                     driver = new FirefoxDriver();
                     driver.manage().window().maximize();
                     break;
